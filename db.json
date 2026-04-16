@@ -1,0 +1,31 @@
+{
+  "incidents": [
+    {
+      "id": "1",
+      "title": "Сработала тревожная кнопка",
+      "location": "Корпус Б, этаж 2, кабинет 204",
+      "severity": "high",
+      "status": "processing",
+      "timestamp": "2023-10-25T08:30:00Z",
+      "description": "Преподаватель случайно нажал кнопку под столом во время уборки класса."
+    },
+    {
+      "title": "АНДРЕЙ ПРОБРАЛСЯ",
+      "location": "Прокопьевск",
+      "severity": "high",
+      "status": "open",
+      "description": "ЧРОЧНО",
+      "timestamp": "2026-04-16T12:34:38.142Z",
+      "id": "NF1Ns5v"
+    },
+    {
+      "title": "найден бесхозный пакет",
+      "location": "корпус 7 первый этаж",
+      "severity": "medium",
+      "status": "open",
+      "description": "",
+      "timestamp": "2026-04-16T13:48:40.620Z",
+      "id": "5_HuP8F"
+    }
+  ]
+}
