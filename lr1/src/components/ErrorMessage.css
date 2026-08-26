@@ -1,0 +1,3 @@
+/* Основные стили — в App.css (.error-container, .error-title,
+   .error-message, .error-actions), чтобы не расходиться с общей
+   дизайн-системой и не конфликтовать по специфичности CSS-селекторов. */
