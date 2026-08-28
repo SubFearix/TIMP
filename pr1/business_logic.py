@@ -1,28 +1,10 @@
-"""
-Слой бизнес-логики (Business Logic Layer).
-
-Содержит алгоритм авторизации, разграничение прав доступа по ролям
-(«охранник» / «начальник охраны») и модули обработки списков учебных
-корпусов, сотрудников охраны и тревог. Модуль обработки тревог следит
-за ссылочной целостностью: перед записью тревоги проверяет через
-слой доступа к данным, что указанные корпус и сотрудник существуют.
-"""
-
-
 class AuthorizationError(Exception):
-    """Ошибка входа или регистрации (неверные данные, занятый логин)."""
-
 
 class AccessDeniedError(Exception):
-    """Пользователю не хватает прав для выполнения операции."""
-
 
 class IncidentReferenceError(Exception):
-    """Указанный корпус или сотрудник не найден при объявлении тревоги."""
-
-
+    
 class AuthorizationModule:
-    """Проверка учётных данных при входе и уникальности логина при регистрации."""
 
     VALID_ROLES = ("охранник", "начальник охраны")
 
@@ -45,13 +27,6 @@ class AuthorizationModule:
 
 
 class AccessControlModule:
-    """
-    Разграничение прав доступа в систему.
-
-    Роль «начальник охраны» получает доступ к управлению учебными
-    корпусами и сотрудниками охраны. Роль «охранник» имеет доступ
-    только к работе с тревогами.
-    """
 
     CHIEF_ROLE = "начальник охраны"
 
@@ -63,7 +38,6 @@ class AccessControlModule:
 
 
 class BuildingsProcessingModule:
-    """CRUD-операции над учебными корпусами (доступно роли «начальник охраны»)."""
 
     def __init__(self, buildings_db, access_control: AccessControlModule):
         self.buildings_db = buildings_db
@@ -83,8 +57,6 @@ class BuildingsProcessingModule:
 
 
 class GuardsProcessingModule:
-    """CRUD-операции над сотрудниками охраны (доступно роли «начальник охраны»)."""
-
     def __init__(self, guards_db, access_control: AccessControlModule):
         self.guards_db = guards_db
         self.access_control = access_control
@@ -109,14 +81,6 @@ class GuardsProcessingModule:
 
 
 class IncidentsProcessingModule:
-    """
-    Обработка списка тревог. Доступна обеим ролям.
-
-    При объявлении тревоги модуль обязан обратиться к модулю доступа
-    к корпусам и модулю доступа к сотрудникам, чтобы убедиться, что
-    указанные ID действительно существуют, прежде чем сделать запись
-    в базу данных тревог.
-    """
 
     def __init__(self, incidents_db, buildings_db, guards_db):
         self.incidents_db = incidents_db
