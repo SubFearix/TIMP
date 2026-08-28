@@ -1,12 +1,3 @@
-"""
-Слой доступа к данным (Data Access Layer).
-
-Каждый класс отвечает только за свою сущность, инициирует соединение
-со своим локальным файлом SQLite и абстрагирует SQL-запросы от
-остальной программы (изолирует слой бизнес-логики от прямой работы
-с базой данных).
-"""
-
 import os
 import sqlite3
 
@@ -15,8 +6,6 @@ os.makedirs(DB_DIR, exist_ok=True)
 
 
 class _BaseDatabase:
-    """Общая функциональность для всех классов доступа к данным."""
-
     db_filename = None
 
     def __init__(self, db_path=None):
@@ -34,8 +23,6 @@ class _BaseDatabase:
 
 
 class UsersDatabase(_BaseDatabase):
-    """Хранит учётные записи (Пользователь: ФИО, логин, пароль, роль)."""
-
     db_filename = "users.db"
 
     def _init_db(self):
@@ -73,8 +60,6 @@ class UsersDatabase(_BaseDatabase):
 
 
 class BuildingsDatabase(_BaseDatabase):
-    """Хранит охраняемые учебные корпуса."""
-
     db_filename = "buildings.db"
 
     def _init_db(self):
@@ -113,8 +98,6 @@ class BuildingsDatabase(_BaseDatabase):
 
 
 class GuardsDatabase(_BaseDatabase):
-    """Хранит сотрудников охраны."""
-
     db_filename = "guards.db"
 
     STATUSES = ("на посту", "на обходе", "не на смене")
@@ -159,8 +142,6 @@ class GuardsDatabase(_BaseDatabase):
 
 
 class IncidentsDatabase(_BaseDatabase):
-    """Хранит журнал тревог (инцидентов)."""
-
     db_filename = "incidents.db"
 
     STATUSES = ("Активна", "Решена", "Ложная")
