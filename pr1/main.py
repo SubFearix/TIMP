@@ -1,13 +1,3 @@
-"""
-Точка входа консольного приложения «Безопасность в образовательном
-учреждении» — системы пропускного режима и реагирования на инциденты.
-
-Архитектура (трёхслойная модель):
-    presentation.py    — слой представления (консольный UI)
-    business_logic.py  — слой бизнес-логики (авторизация, права доступа, обработка списков)
-    data_access.py     — слой доступа к данным (SQLite: users.db, buildings.db, guards.db, incidents.db)
-"""
-
 from data_access import UsersDatabase, BuildingsDatabase, GuardsDatabase, IncidentsDatabase
 from business_logic import (
     AuthorizationModule,
@@ -20,21 +10,17 @@ from presentation import LoginUI, RegistrationUI, BuildingsUI, GuardsUI, Inciden
 
 
 def build_application():
-    """Инициализирует все три слоя и связывает их между собой."""
-    # Слой доступа к данным
     users_db = UsersDatabase()
     buildings_db = BuildingsDatabase()
     guards_db = GuardsDatabase()
     incidents_db = IncidentsDatabase()
 
-    # Слой бизнес-логики
     authorization_module = AuthorizationModule(users_db)
     access_control = AccessControlModule()
     buildings_module = BuildingsProcessingModule(buildings_db, access_control)
     guards_module = GuardsProcessingModule(guards_db, access_control)
     incidents_module = IncidentsProcessingModule(incidents_db, buildings_db, guards_db)
 
-    # Слой представления
     login_ui = LoginUI(authorization_module)
     registration_ui = RegistrationUI(authorization_module)
     buildings_ui = BuildingsUI(buildings_module)
@@ -63,7 +49,7 @@ def main_menu(user, buildings_ui, guards_ui, incidents_ui):
                 return
             else:
                 print("Неизвестный пункт меню.")
-        else:  # охранник
+        else:
             print("1. Журнал тревог")
             print("0. Выйти из аккаунта")
             choice = input("Выбор: ").strip()
