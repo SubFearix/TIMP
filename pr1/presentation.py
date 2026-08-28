@@ -1,12 +1,3 @@
-"""
-Слой представления (Presentation Layer / UI).
-
-Отвечает за весь консольный интерфейс: меню, ввод и базовую
-валидацию данных, вывод списков. Не содержит бизнес-логики —
-только вызывает соответствующие методы слоя бизнес-логики и
-отображает результат или текст ошибки.
-"""
-
 from business_logic import (
     AuthorizationError,
     AccessDeniedError,
@@ -23,8 +14,6 @@ def _read_int(prompt):
 
 
 class LoginUI:
-    """Диалоговое окно входа в систему."""
-
     def __init__(self, authorization_module):
         self.authorization_module = authorization_module
 
@@ -42,8 +31,6 @@ class LoginUI:
 
 
 class RegistrationUI:
-    """Диалоговое окно регистрации нового пользователя."""
-
     def __init__(self, authorization_module):
         self.authorization_module = authorization_module
 
@@ -65,8 +52,6 @@ class RegistrationUI:
 
 
 class BuildingsUI:
-    """Меню отображения, добавления и удаления учебных корпусов."""
-
     def __init__(self, buildings_module):
         self.buildings_module = buildings_module
 
@@ -117,8 +102,6 @@ class BuildingsUI:
 
 
 class GuardsUI:
-    """Меню отображения, добавления, удаления и смены статуса сотрудников охраны."""
-
     def __init__(self, guards_module):
         self.guards_module = guards_module
 
@@ -180,8 +163,6 @@ class GuardsUI:
 
 
 class IncidentsUI:
-    """Меню отображения, объявления и изменения статуса тревог."""
-
     def __init__(self, incidents_module):
         self.incidents_module = incidents_module
 
